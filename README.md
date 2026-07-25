@@ -1,4 +1,17 @@
-## CGF-softmax Ananoymous
+# CGF-softmax
 
-Hello, this is an anonymous GitHub repository created to share codes during the review process of the CGF-softmax paper.
+This anonymous repository contains only the **GPU implementation** of CGF-softmax used during the paper review. This work uses the DESILO FHE library developed by DESILO Inc. (https://desilo.ai)
 
+## Install
+
+The package requires an NVIDIA GPU and a CUDA 12.4-compatible environment.
+
+```bash
+pip install -e ".[test]"
+```
+
+## Run the test
+
+```bash
+pytest -q -s
+```
