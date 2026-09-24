@@ -1,18 +1,18 @@
 import numpy as np
 
-from cgf_softmax import DesiloFHEGPU, cgf_softmax
+from cgf_softmax import DesiloFHECPU, cgf_softmax
 
 
 
-def test_cgf_softmax_on_gpu():
+def test_cgf_softmax_on_cpu():
     k = 2
     exp_degree = 15
-    gpu_engine = DesiloFHEGPU()
+    cpu_engine = DesiloFHECPU()
     rng = np.random.default_rng(42)
     values = rng.normal(0.0, 1.0, size=(256, 256)) 
 
     actual = cgf_softmax(
-        gpu_engine,
+        cpu_engine,
         values,
         k=k,
         exp_degree=exp_degree,
@@ -24,13 +24,13 @@ def test_cgf_softmax_on_gpu():
 
     mean_error = np.mean(np.abs(expected - actual))
 
-    print("\n=== CGF-softmax GPU Test ===")
+    print("\n=== CGF-softmax Test ===")
     print(f"Input shape:              {values.shape}")
     print(f"Parameters:               k={k}, exp_degree={exp_degree}")
-    print(f"Multiplicative depth:     {gpu_engine.depth}")
+    print(f"Multiplicative depth:     {cpu_engine.depth}")
     print(
         "FHE evaluation time:      "
-        f"{gpu_engine.evaluation_time:.6f} s "
+        f"{cpu_engine.evaluation_time:.6f} s "
         "(after encryption -> before decryption)"
     )
     print(f"Mean absolute error:      {mean_error:.6e}")

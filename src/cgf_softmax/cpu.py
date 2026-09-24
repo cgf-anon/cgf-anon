@@ -1,16 +1,18 @@
-"""Minimal desilofhe GPU wrapper required by CGF-softmax."""
-
 import numpy as np
 from desilofhe import Ciphertext, Engine
 
 
-class DesiloFHEGPU:
-    """Own the GPU engine and keys used by CGF-softmax."""
+
+class DesiloFHECPU:
+    """Own the CPU engine and keys used by CGF-softmax."""
 
     def __init__(
         self,
     ) -> None:
-        self.engine = Engine(use_bootstrap=True, mode="gpu")
+        engine_mode="parallel"
+        engine_thread_count=8
+        self.engine = Engine(use_bootstrap=True, mode=engine_mode, thread_count=engine_thread_count)
+        print(f"DesiloFHE engine initialized with mode={engine_mode} and thread_count={engine_thread_count}")
         self.secret_key = self.engine.create_secret_key()
         self.public_key = self.engine.create_public_key(self.secret_key)
         self.relinearization_key = self.engine.create_relinearization_key(

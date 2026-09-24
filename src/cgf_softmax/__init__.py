@@ -1,6 +1,6 @@
-"""CGF-softmax implemented with desilofhe on GPU."""
+"""CGF-softmax implemented with desilofhe."""
 
 from .core import cgf_softmax
-from .gpu import DesiloFHEGPU
+from .cpu import DesiloFHECPU
 
-__all__ = ["DesiloFHEGPU", "cgf_softmax"]
+__all__ = ["DesiloFHECPU", "cgf_softmax"]
